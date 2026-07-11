@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Albercik · CyberSec Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: #0a0a0a;
+            color: #e0e0e0;
+            font-family: 'Chakra Petch', sans-serif;
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background:
+                radial-gradient(ellipse at 20% 40%, rgba(204, 0, 0, 0.06) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 70%, rgba(255, 69, 0, 0.04) 0%, transparent 60%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem 3rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* HEADER */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.8rem 0 1.5rem;
+            border-bottom: 1px solid rgba(204, 0, 0, 0.15);
+            margin-bottom: 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .logo-bracket { color: #cc0000; }
+        .logo-name { color: #e0e0e0; }
+
+        .nav {
+            display: flex;
+            gap: 0.4rem;
+        }
+
+        .nav a {
+            color: #888;
+            text-decoration: none;
+            font-size: 0.8rem;
+            padding: 0.3rem 0.6rem;
+            border: 1px solid transparent;
+            transition: all 0.2s;
+            letter-spacing: 0.5px;
+        }
+
+        .nav a:hover {
+            color: #e0e0e0;
+            border-color: #cc0000;
+            background: rgba(204, 0, 0, 0.06);
+        }
+
+        /* PROFILE */
+        .profile {
+            margin-bottom: 2.5rem;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid rgba(204, 0, 0, 0.08);
+        }
+
+        .profile-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .profile-tag {
+            font-size: 0.7rem;
+            padding: 0.15rem 0.6rem;
+            border: 1px solid rgba(204, 0, 0, 0.25);
+            color: #ff4500;
+            background: rgba(204, 0, 0, 0.05);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .profile-tag.filled {
+            background: #cc0000;
+            color: #0a0a0a;
+            border-color: #cc0000;
+            font-weight: 600;
+        }
+
+        .profile-name {
+            font-size: 2.4rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 0.3rem;
+        }
+
+        .profile-name .highlight { color: #cc0000; }
+        .profile-name .dim { color: #666; font-weight: 300; }
+
+        .profile-title {
+            font-size: 0.95rem;
+            color: #999;
+            margin-bottom: 0.8rem;
+        }
+
+        .profile-desc {
+            color: #888;
+            font-size: 0.85rem;
+            max-width: 700px;
+            line-height: 1.7;
+        }
+
+        /* SECTION */
+        .section {
+            margin-bottom: 2rem;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.4rem 0;
+            margin-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(204, 0, 0, 0.12);
+        }
+
+        .section-header .arrow {
+            color: #cc0000;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .section-header h2 {
+            font-size: 0.95rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #e0e0e0;
+        }
+
+        .section-header .badge {
+            color: #666;
+            font-size: 0.7rem;
+            margin-left: auto;
+            letter-spacing: 0.5px;
+        }
+
+        /* CARDS */
+        .card {
+            background: rgba(15, 15, 15, 0.6);
+            border: 1px solid rgba(204, 0, 0, 0.08);
+            padding: 1rem 1.2rem;
+            margin-bottom: 0.6rem;
+            transition: border-color 0.2s, background 0.2s;
+        }
+
+        .card:hover {
+            border-color: rgba(204, 0, 0, 0.2);
+            background: rgba(20, 20, 20, 0.7);
+        }
+
+        .card-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #ff4500;
+            margin-bottom: 0.15rem;
+        }
+
+        .card-sub {
+            font-size: 0.75rem;
+            color: #555;
+            letter-spacing: 0.5px;
+        }
+
+        .card p, .card-text {
+            font-size: 0.82rem;
+            color: #999;
+            margin-top: 0.3rem;
+            line-height: 1.6;
+        }
+
+        .card .meta-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.3rem;
+            margin-top: 0.5rem;
+        }
+
+        .card .meta-tag {
+            font-size: 0.65rem;
+            color: #666;
+            border: 1px solid rgba(204, 0, 0, 0.1);
+            padding: 0.1rem 0.5rem;
+        }
+
+        /* STORY (biografia) */
+        .story-text {
+            font-size: 0.82rem;
+            color: #999;
+            line-height: 1.8;
+        }
+
+        .story-text p {
+            margin-bottom: 0.8rem;
+        }
+
+        .story-text .mention {
+            color: #ff4500;
+            font-weight: 500;
+        }
+
+        /* ACHIEVEMENTS LIST */
+        .ach-list {
+            list-style: none;
+        }
+
+        .ach-list li {
+            font-size: 0.82rem;
+            color: #999;
+            padding: 0.35rem 0;
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            border-bottom: 1px solid rgba(204, 0, 0, 0.04);
+        }
+
+        .ach-list li::before {
+            content: '>';
+            color: #cc0000;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .ach-list a {
+            color: #ff4500;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(204, 0, 0, 0.15);
+            transition: all 0.2s;
+        }
+
+        .ach-list a:hover {
+            border-bottom-color: #cc0000;
+            text-shadow: 0 0 8px rgba(204, 0, 0, 0.15);
+        }
+
+        /* INTERESTS */
+        .interests-list {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+
+        .interests-list li {
+            font-size: 0.8rem;
+            color: #888;
+            padding: 0.3rem 0.8rem;
+            border: 1px solid rgba(204, 0, 0, 0.08);
+            transition: all 0.2s;
+        }
+
+        .interests-list li:hover {
+            border-color: rgba(204, 0, 0, 0.25);
+            color: #aaa;
+        }
+
+        /* CONTACT */
+        .contact-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.82rem;
+            color: #999;
+            text-decoration: none;
+            padding: 0.45rem 0.9rem;
+            border: 1px solid rgba(204, 0, 0, 0.1);
+            transition: all 0.2s;
+        }
+
+        .contact-item:hover {
+            border-color: #cc0000;
+            color: #e0e0e0;
+            background: rgba(204, 0, 0, 0.06);
+        }
+
+        .contact-item .icon {
+            color: #cc0000;
+            font-weight: 700;
+        }
+
+        /* FOOTER */
+        .footer {
+            text-align: center;
+            padding: 1.5rem 0 0.5rem;
+            margin-top: 2.5rem;
+            border-top: 1px solid rgba(204, 0, 0, 0.06);
+            font-size: 0.7rem;
+            color: #555;
+            letter-spacing: 0.5px;
+        }
+
+        .footer .accent { color: #cc0000; }
+
+        /* SCROLLBAR */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: #555; }
+        ::-webkit-scrollbar-thumb:hover { background: #777; }
+
+        /* RESPONSIVE */
+        @media (max-width: 640px) {
+            .container { padding: 1rem; }
+            .header { flex-direction: column; align-items: flex-start; gap: 0.8rem; }
+            .profile-name { font-size: 1.6rem; }
+            .nav { flex-wrap: wrap; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- HEADER -->
+    <div class="header">
+        <div class="logo">
+            <span class="logo-bracket">[</span>
+            <span class="logo-name">albercik</span>
+            <span class="logo-bracket">]</span>
+        </div>
+        <div class="nav">
+            <a href="#about">_o mnie</a>
+            <a href="#story">_historia</a>
+            <a href="#achievements">_osiagniecia</a>
+            <a href="#contact">_kontakt</a>
+        </div>
+    </div>
+
+    <!-- PROFILE -->
+    <div class="profile" id="about">
+        <div class="profile-tags">
+            <span class="profile-tag filled">17 yo</span>
+            <span class="profile-tag">jr. pentester</span>
+            <span class="profile-tag">organista</span>
+            <span class="profile-tag">Poland</span>
+            <span class="profile-tag">eCPPT</span>
+            <span class="profile-tag">eJPT</span>
+        </div>
+        <div class="profile-name">
+            Albert <span class="highlight">"Albercik"</span> <span class="dim">Miechowicz</span>
+        </div>
+        <div class="profile-title">
+            &rsaquo; Jr. Pentester &amp; organista z 6-letnim doświadczeniem
+        </div>
+        <div class="profile-desc">
+            Każdego dnia staram się być najlepszą wersją siebie i gonić moje marzenia.
+            Stale się uczę i rozwijam, a mój wiek to dowód na to, że jeśli się czegoś
+            bardzo chce, można wszystko &mdash; najważniejsze uwierzyć w siebie i lecieć po swoje.
+        </div>
+    </div>
+
+    <!-- STORY / BIOGRAPHY -->
+    <div class="section" id="story">
+        <div class="section-header">
+            <span class="arrow">&rsaquo;</span>
+            <h2>Biografia</h2>
+            <span class="badge">[ historia ]</span>
+        </div>
+
+        <div class="card" style="border-left: 2px solid #cc0000;">
+            <div class="story-text">
+                <p>
+                    Urodziłem się <strong>13 maja 2009 roku</strong> &mdash; na chwilę obecną mam <strong>17 lat</strong>.
+                    Ale mój wiek nigdy nie stanął mi na przeszkodzie, aby rozwijać się i iść po swoje.
+                </p>
+                <p>
+                    Moja przygoda z cyberbezpieczeństwem zaczęła się pod koniec <strong>stycznia 2024</strong> roku,
+                    gdzie młody Albercik (wtedy 14-letni) za swoje pierwsze pieniądze zarobione z tworzenia grafik
+                    kupił kursy etycznego hakowania na Udemy. Wtedy jeszcze nie wiedziałem, że zakupienie tych kursów
+                    tak bardzo zmieni moje życie. Hakowanie od początku bardzo mnie ciekawiło i na samą myśl o nim
+                    się cieszyłem. Kiedy myślałem o tych ludziach w kapturach, myślałem sobie:
+                    <em>"Kurde, chciałbym być jak oni..."</em>
+                </p>
+                <p>
+                    Moje początki wspominam bardzo dobrze &mdash; uczyłem się podstawowych komend w Linuxie,
+                    a także przeprowadzania podstawowych ataków, takich jak phishing, sniffing czy brute force.
+                    Z każdą poznaną techniką nakręcałem się coraz bardziej i chciałem wiedzieć coraz więcej.
+                    Hakowałem sobie tak i hakowałem, aż w końcu natknąłem się na platformę
+                    <span class="mention">Hack The Box</span>, gdzie w rankingu najlepszych graczy zobaczyłem Polaka!
+                    Był nim dobrze znany <span class="mention">Michał "miblak" Błaszczak</span>, który później
+                    stał się moim mentorem i odegrał kluczową rolę w moim rozwoju.
+                </p>
+                <p>
+                    Po zobaczeniu miblaka od razu postanowiłem go przestalkować i napisać do niego na Messengerze
+                    z prośbą o porady (tak, na Messengerze XD). Wtedy miblak wysłał mi zaproszenie na Discord
+                    <span class="mention">NTHW</span>, na którym było wielu specjalistów cyberbezpieczeństwa,
+                    a także CTF playerów. Bez wahania dołączyłem i poznałem tam mnóstwo wspaniałych ludzi.
+                    Byłem wtedy chyba ciekawą osobą wśród społeczności, ponieważ miałem dopiero 15 lat
+                    i byłem najmłodszym aktywnym członkiem tamtego czasu.
+                </p>
+                <p>
+                    Pamiętam, jak pewnego dnia <span class="mention">Krystian</span> robił CTFa na kanale Discord
+                    i przyglądając się temu, miałem w głowie bałagan. Zdałem sobie sprawę, że kompletnie nic
+                    nie rozumiem i przede mną jeszcze długa droga. Ale nie poddałem się! Napisałem na NTHW
+                    z prośbą o porady i zostałem wysłany na <span class="mention">HTB Academy</span>.
+                </p>
+                <p>
+                    Moje początki z Pentester Path na Hack The Box Academy wspominam dosyć źle &mdash; wiedzy
+                    było cholernie dużo i trudno ją przyswajałem, ale zawsze cisnąłem dalej. Aż w końcu po
+                    5 miesiącach poznałem jakieś podstawy, ale dalej nie potrafiłem zrobić easy maszynki
+                    na Hack The Box. Wtedy zadałem kolejne pytanie na NTHW o dalszą drogę rozwoju.
+                </p>
+                <p>
+                    <span class="mention">Toster</span> razem z <span class="mention">Miblakiem</span> wysłali
+                    mnie na <span class="mention">PortSwigger Academy</span>. Dostałem challenge: robienia
+                    3 labów dziennie z notatkami, a swoją pracę miałem wrzucać codziennie na specjalny kanał
+                    na Discordzie NTHW.
+                </p>
+                <p>
+                    I wtedy właśnie zaczął się najtrudniejszy dla mnie okres rozwojowy. Nauki było naprawdę
+                    dużo i uczyłem się dosłownie wszędzie &mdash; w szkole, w domu, w autobusie, no dosłownie
+                    wszędzie! Ale po <strong>3 miesiącach</strong> mojej walki udało mi się zrobić wszystkie
+                    <strong>270 labów</strong>. Po skończonym challengu poczułem, że moja wiedza jest już większa,
+                    i zacząłem robić pierwsze easy maszynki na Hack The Box.
+                </p>
+                <p>
+                    Po skończeniu PortSwiggera nie miałem już jakiegoś szczególnego planu nauki &mdash;
+                    poznałem już wymagane podstawy i po prostu uczyłem się z tego, z czego miałem ochotę.
+                    Głównie był to Hack The Box, ale też TryHackMe oraz Hacking Hub.
+                </p>
+                <p>
+                    <strong>Teraz mam 17 lat</strong> i moim marzeniem jest w przyszłości zostać
+                    <span class="mention">Red Teamerem</span>. Obiecuję, że będę pracował tak ciężko jak zawsze,
+                    żeby osiągnąć mój cel jak najwcześniej &mdash; ponieważ udowodniłem sobie już nie raz,
+                    że wszystko jest możliwe!
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ACHIEVEMENTS -->
+    <div class="section" id="achievements">
+        <div class="section-header">
+            <span class="arrow">&rsaquo;</span>
+            <h2>Certyfikaty &amp; Osiągnięcia</h2>
+            <span class="badge">[ X ]</span>
+        </div>
+
+        <div class="card">
+            <div class="card-title">eCPPTv3 &mdash; Professional Penetration Tester</div>
+            <div class="card-sub">// INE &mdash; 2025</div>
+            <p>Zaawansowany certyfikat pentesterski potwierdzający umiejętności przeprowadzania profesjonalnych testów penetracyjnych.</p>
+            <div class="meta-tags">
+                <span class="meta-tag"><a href="https://certs.ine.com/87e00956-39c4-4c23-9bb9-ae5f68e08212#acc.Pzr6tXKa" style="color: #ff4500; text-decoration: none;">verify &nearr;</a></span>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">eJPT &mdash; Junior Penetration Tester</div>
+            <div class="card-sub">// INE &mdash; 2025</div>
+            <p>Certyfikat potwierdzający podstawowe umiejętności pentesterskie.</p>
+            <div class="meta-tags">
+                <span class="meta-tag"><a href="https://certs.ine.com/a089020c-4288-458b-a077-f8d37121e20e#acc.shXFvdNu" style="color: #ff4500; text-decoration: none;">verify &nearr;</a></span>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Ethical Hacking Certificates (Udemy)</div>
+            <div class="card-sub">// Udemy &mdash; 2024</div>
+            <p>Dwa kursy etycznego hakowania, które rozpoczęły moją przygodę z cyberbezpieczeństwem.</p>
+            <div class="meta-tags">
+                <span class="meta-tag"><a href="https://www.udemy.com/certificate/UC-c9b56582-1c37-48f9-942a-963d1b686c66/" style="color: #ff4500; text-decoration: none;">certificate 1 &nearr;</a></span>
+                <span class="meta-tag"><a href="#" style="color: #ff4500; text-decoration: none;">certificate 2 &nearr;</a></span>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Bug Bounty Path &mdash; Hack The Box</div>
+            <div class="card-sub">// HTB Academy</div>
+            <p>Ukończona ścieżka Bug Bounty na platformie Hack The Box Academy.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-title">SHG &mdash; Praktyki z pentestów</div>
+            <div class="card-sub">// SHG &mdash; 2025</div>
+            <p>Krótka praktyka w firmie SHG obejmująca 2 próbne pentesty.</p>
+        </div>
+
+        <div style="margin-top: 1rem;">
+            <ul class="ach-list">
+                <li>Udział w eventach cyberbezpieczeństwa &mdash; <strong>Kraków NTHW Meetup</strong></li>
+                <li>Prowadziłem wykład online z <strong>CISO</strong> oraz innymi osobami z branży</li>
+                <li>100+ zrobionych maszyn na Hack The Box &mdash; <a href="https://app.hackthebox.com/users/2015638">app.hackthebox.com/users/2015638</a></li>
+                <li>TryHackMe &mdash; <a href="https://tryhackme.com/p/Albercik">tryhackme.com/p/Albercik</a></li>
+                <li>Certyfikaty uczestnictwa w szkoleniach <strong>Kacpra Szurka</strong> (Kohorta etc.)</li>
+                <li>Liczne rekomendacje &mdash; <a href="https://www.linkedin.com/posts/albert-miechowicz-b6970b323_praktyki-pentest-hacking-activity-7373298489700794368-J76E">LinkedIn</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- INTERESTS -->
+    <div class="section">
+        <div class="section-header">
+            <span class="arrow">&rsaquo;</span>
+            <h2>Zainteresowania</h2>
+            <span class="badge">[ X ]</span>
+        </div>
+
+        <ul class="interests-list">
+            <li>CTF / Capture The Flag</li>
+            <li>Hack The Box</li>
+            <li>TryHackMe</li>
+            <li>Bug Bounty</li>
+            <li>Red Teaming</li>
+            <li>Privilege Escalation</li>
+            <li>Active Directory</li>
+            <li>Web Security</li>
+            <li>Organy / Muzyka</li>
+        </ul>
+    </div>
+
+    <!-- CONTACT -->
+    <div class="section" id="contact">
+        <div class="section-header">
+            <span class="arrow">&rsaquo;</span>
+            <h2>Kontakt</h2>
+            <span class="badge">[ X ]</span>
+        </div>
+
+        <div class="contact-grid">
+            <a href="mailto:albert.miechowicz1@gmail.com" class="contact-item">
+                <span class="icon">@</span>
+                albert.miechowicz1@gmail.com
+            </a>
+            <a href="#" class="contact-item">
+                <span class="icon">&gt;_</span>
+                GitHub
+            </a>
+            <a href="https://www.linkedin.com/posts/albert-miechowicz-b6970b323_praktyki-pentest-hacking-activity-7373298489700794368-J76E" class="contact-item">
+                <span class="icon">in</span>
+                LinkedIn
+            </a>
+            <a href="#" class="contact-item">
+                <span class="icon">#</span>
+                Discord
+            </a>
+            <a href="https://app.hackthebox.com/users/2015638" class="contact-item">
+                <span class="icon">HTB</span>
+                Hack The Box
+            </a>
+            <a href="https://tryhackme.com/p/Albercik" class="contact-item">
+                <span class="icon">THM</span>
+                TryHackMe
+            </a>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        <span class="accent">[ albercik ]</span> &nbsp;|&nbsp; &lt;/&gt; with passion for cybersecurity &nbsp;|&nbsp; <span id="year"></span>
+    </div>
+
+</div>
+
+<script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
