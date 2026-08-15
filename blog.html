@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog · Albercik CyberSec</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    <style>
+        /* BAZOWY CSS (taki sam jak w portfolio) */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: #0a0a0a;
+            color: #e0e0e0;
+            font-family: 'Chakra Petch', sans-serif;
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background:
+                radial-gradient(ellipse at 20% 40%, rgba(204, 0, 0, 0.06) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 70%, rgba(255, 69, 0, 0.04) 0%, transparent 60%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem 3rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* HEADER */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.8rem 0 1.5rem;
+            border-bottom: 1px solid rgba(204, 0, 0, 0.15);
+            margin-bottom: 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-decoration: none;
+        }
+
+        .logo-bracket { color: #cc0000; }
+        .logo-name { color: #e0e0e0; transition: color 0.2s; }
+        .logo:hover .logo-name { color: #ff4500; }
+
+        .nav {
+            display: flex;
+            gap: 0.4rem;
+        }
+
+        .nav a {
+            color: #888;
+            text-decoration: none;
+            font-size: 0.8rem;
+            padding: 0.3rem 0.6rem;
+            border: 1px solid transparent;
+            transition: all 0.2s;
+            letter-spacing: 0.5px;
+        }
+
+        .nav a:hover, .nav a.active {
+            color: #e0e0e0;
+            border-color: #cc0000;
+            background: rgba(204, 0, 0, 0.06);
+        }
+
+        /* SECTION HEADER */
+        .section { margin-bottom: 2rem; }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.4rem 0;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(204, 0, 0, 0.12);
+        }
+
+        .section-header .arrow {
+            color: #cc0000;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .section-header h1 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #e0e0e0;
+        }
+
+        .section-header .badge {
+            color: #666;
+            font-size: 0.7rem;
+            margin-left: auto;
+            letter-spacing: 0.5px;
+        }
+
+        /* BLOG CARDS */
+        .blog-card {
+            background: rgba(15, 15, 15, 0.6);
+            border: 1px solid rgba(204, 0, 0, 0.08);
+            padding: 1.5rem;
+            margin-bottom: 1.2rem;
+            transition: border-color 0.2s, background 0.2s, transform 0.2s;
+            display: flex;
+            flex-direction: column;
+            border-left: 3px solid transparent;
+        }
+
+        .blog-card:hover {
+            border-color: rgba(204, 0, 0, 0.2);
+            background: rgba(20, 20, 20, 0.8);
+            border-left: 3px solid #cc0000;
+        }
+
+        .blog-meta {
+            font-size: 0.75rem;
+            color: #666;
+            letter-spacing: 1px;
+            margin-bottom: 0.4rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .blog-meta .date { color: #999; }
+        .blog-meta .author { color: #ff4500; }
+
+        .blog-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #e0e0e0;
+            margin-bottom: 0.5rem;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .blog-title:hover {
+            color: #cc0000;
+        }
+
+        .blog-excerpt {
+            font-size: 0.85rem;
+            color: #999;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .blog-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+            padding-top: 1rem;
+            border-top: 1px dashed rgba(204, 0, 0, 0.1);
+        }
+
+        .meta-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+
+        .meta-tag {
+            font-size: 0.65rem;
+            color: #888;
+            border: 1px solid rgba(204, 0, 0, 0.15);
+            padding: 0.2rem 0.6rem;
+            background: rgba(204, 0, 0, 0.03);
+            text-transform: uppercase;
+        }
+
+        .read-more {
+            font-size: 0.8rem;
+            color: #ff4500;
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            transition: color 0.2s, transform 0.2s;
+        }
+
+        .read-more:hover {
+            color: #cc0000;
+            transform: translateX(3px);
+        }
+
+        /* PAGINATION */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 2rem;
+        }
+
+        .page-link {
+            display: inline-block;
+            padding: 0.4rem 0.8rem;
+            border: 1px solid rgba(204, 0, 0, 0.15);
+            color: #888;
+            text-decoration: none;
+            font-size: 0.8rem;
+            transition: all 0.2s;
+        }
+
+        .page-link:hover, .page-link.active {
+            border-color: #cc0000;
+            color: #e0e0e0;
+            background: rgba(204, 0, 0, 0.1);
+        }
+
+        /* FOOTER */
+        .footer {
+            text-align: center;
+            padding: 1.5rem 0 0.5rem;
+            margin-top: 2.5rem;
+            border-top: 1px solid rgba(204, 0, 0, 0.06);
+            font-size: 0.7rem;
+            color: #555;
+            letter-spacing: 0.5px;
+        }
+
+        .footer .accent { color: #cc0000; }
+
+        /* SCROLLBAR */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: #555; }
+        ::-webkit-scrollbar-thumb:hover { background: #777; }
+
+        /* RESPONSIVE */
+        @media (max-width: 640px) {
+            .container { padding: 1rem; }
+            .header { flex-direction: column; align-items: flex-start; gap: 0.8rem; }
+            .nav { flex-wrap: wrap; }
+            .blog-footer { flex-direction: column; align-items: flex-start; gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- HEADER -->
+    <div class="header">
+        <a href="index.html" class="logo">
+            <span class="logo-bracket">[</span>
+            <span class="logo-name">albercik</span>
+            <span class="logo-bracket">]</span>
+        </a>
+        <div class="nav">
+            <a href="index.html">_portfolio</a>
+            <a href="blog.html" class="active">_blog</a>
+            <a href="index.html#contact">_kontakt</a>
+        </div>
+    </div>
+
+    <!-- BLOG SECTION -->
+    <div class="section" id="blog">
+        <div class="section-header">
+            <span class="arrow">&rsaquo;</span>
+            <h1>Blog Albercika <3</h1>
+            <span class="badge">[ writeupy & artykuły ]</span>
+        </div>
+
+        <!-- POST 1 -->
+        <article class="blog-card">
+            <div class="blog-meta">
+                <span class="date">12 Sierpnia 2026</span>
+                <span class="author">@albercik</span>
+            </div>
+            <a href="posty/post1.html" class="blog-title">CWES overview by Albercik</a>
+            <div class="blog-excerpt">
+                Moja przygoda ze zdawaniem CWES
+            </div>
+            <div class="blog-footer">
+                <div class="meta-tags">
+                    <span class="meta-tag">#htb</span>
+                    <span class="meta-tag">#certyfikat</span>
+                    <span class="meta-tag">#CWES</span>
+                </div>
+                <a href="posty/post1.html" class="read-more">Czytaj dalej &rsaquo;</a>
+            </div>
+        </article>
+
+        <!-- PAGINATION -->
+        <div class="pagination">
+            <a href="#" class="page-link">&laquo;</a>
+            <a href="#" class="page-link active">1</a>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        <span class="accent">[ albercik ]</span> &nbsp;|&nbsp; &lt;/&gt; with passion for cybersecurity &nbsp;|&nbsp; <span id="year"></span>
+    </div>
+
+</div>
+
+<script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
