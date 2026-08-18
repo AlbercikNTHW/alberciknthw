@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CWES overview by Albercik · Blog</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    <style>
+        /* BAZOWY CSS */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: #0a0a0a;
+            color: #e0e0e0;
+            font-family: 'Chakra Petch', sans-serif;
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background:
+                radial-gradient(ellipse at 20% 40%, rgba(204, 0, 0, 0.06) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 70%, rgba(255, 69, 0, 0.04) 0%, transparent 60%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem 3rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* HEADER */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.8rem 0 1.5rem;
+            border-bottom: 1px solid rgba(204, 0, 0, 0.15);
+            margin-bottom: 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-decoration: none;
+        }
+
+        .logo-bracket { color: #cc0000; }
+        .logo-name { color: #e0e0e0; transition: color 0.2s; }
+        .logo:hover .logo-name { color: #ff4500; }
+
+        .nav {
+            display: flex;
+            gap: 0.4rem;
+        }
+
+        .nav a {
+            color: #888;
+            text-decoration: none;
+            font-size: 0.8rem;
+            padding: 0.3rem 0.6rem;
+            border: 1px solid transparent;
+            transition: all 0.2s;
+            letter-spacing: 0.5px;
+        }
+
+        .nav a:hover, .nav a.active {
+            color: #e0e0e0;
+            border-color: #cc0000;
+            background: rgba(204, 0, 0, 0.06);
+        }
+
+        /* BACK BUTTON */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #888;
+            text-decoration: none;
+            font-size: 0.85rem;
+            margin-bottom: 2rem;
+            transition: color 0.2s;
+        }
+        
+        .back-link:hover { color: #ff4500; }
+
+        /* POST HEADER */
+        .post-header {
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(204, 0, 0, 0.1);
+        }
+
+        .post-meta {
+            font-size: 0.8rem;
+            color: #666;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .post-meta .author { color: #ff4500; font-weight: 500; }
+        .post-meta .date { color: #999; }
+        
+        .meta-tags {
+            display: flex;
+            gap: 0.4rem;
+        }
+
+        .meta-tag {
+            font-size: 0.65rem;
+            color: #888;
+            border: 1px solid rgba(204, 0, 0, 0.15);
+            padding: 0.2rem 0.6rem;
+            background: rgba(204, 0, 0, 0.03);
+            text-transform: uppercase;
+        }
+
+        .post-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #e0e0e0;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        /* POST CONTENT */
+        .post-content {
+            font-size: 0.95rem;
+            color: #bbb;
+            line-height: 1.8;
+        }
+
+        .post-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .post-content h2 {
+            font-size: 1.4rem;
+            color: #e0e0e0;
+            margin: 2.5rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(204, 0, 0, 0.2);
+            font-weight: 600;
+        }
+
+        .post-content h3 {
+            font-size: 1.1rem;
+            color: #ff4500;
+            margin: 2rem 0 0.8rem;
+            font-weight: 500;
+        }
+
+        .post-content strong {
+            color: #e0e0e0;
+        }
+
+        .post-content a {
+            color: #ff4500;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(204, 0, 0, 0.3);
+            transition: all 0.2s;
+        }
+
+        .post-content a:hover {
+            border-bottom-color: #cc0000;
+            color: #cc0000;
+        }
+
+        .post-content ul, .post-content ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+            color: #bbb;
+        }
+
+        .post-content li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .post-content ul li::marker {
+            color: #cc0000;
+        }
+
+        .post-content blockquote {
+            border-left: 3px solid #cc0000;
+            background: rgba(204, 0, 0, 0.05);
+            padding: 1rem 1.5rem;
+            margin: 2rem 0;
+            color: #999;
+            font-style: italic;
+        }
+
+        .post-content pre {
+            background: #0d0d0d;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-left: 3px solid #ff4500;
+            padding: 1rem 1.2rem;
+            margin-bottom: 1.5rem;
+            overflow-x: auto;
+            border-radius: 2px;
+        }
+
+        .post-content code {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.85rem;
+            color: #a8ff60;
+        }
+
+        .post-content p code, .post-content li code {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.1rem 0.4rem;
+            border-radius: 3px;
+            color: #ff4500;
+            font-size: 0.85rem;
+            border: 1px solid rgba(204, 0, 0, 0.1);
+        }
+
+        .post-content img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid rgba(204, 0, 0, 0.2);
+            margin: 1.5rem 0;
+            display: block;
+        }
+
+        /* FOOTER */
+        .footer {
+            text-align: center;
+            padding: 1.5rem 0 0.5rem;
+            margin-top: 3.5rem;
+            border-top: 1px solid rgba(204, 0, 0, 0.06);
+            font-size: 0.7rem;
+            color: #555;
+            letter-spacing: 0.5px;
+        }
+
+        .footer .accent { color: #cc0000; }
+
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: #555; }
+        ::-webkit-scrollbar-thumb:hover { background: #777; }
+
+        @media (max-width: 640px) {
+            .container { padding: 1rem; }
+            .header { flex-direction: column; align-items: flex-start; gap: 0.8rem; }
+            .post-title { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- HEADER -->
+    <div class="header">
+        <a href="index.html" class="logo">
+            <span class="logo-bracket">[</span>
+            <span class="logo-name">albercik</span>
+            <span class="logo-bracket">]</span>
+        </a>
+        <div class="nav">
+            <a href="../index.html">_portfolio</a>
+            <a href="../blog.html" class="active">_blog</a>
+            <a href="../index.html#contact">_kontakt</a>
+        </div>
+    </div>
+
+    <!-- POWRÓT -->
+    <a href="blog.html" class="back-link">&lsaquo; Wróć do zapisków</a>
+
+    <!-- POST HEADER -->
+    <div class="post-header">
+        <div class="post-meta">
+            <span class="author">@albercik</span>
+            <span class="date">28 Sierpnia 2026</span>
+            <div class="meta-tags">
+                <span class="meta-tag">#cwes</span>
+                <span class="meta-tag">#htb</span>
+                <span class="meta-tag">#web</span>
+            </div>
+        </div>
+        <h1 class="post-title">CWES overview by Albercik</h1>
+    </div>
+
+    <!-- POST CONTENT -->
+    <div class="post-content">
+        <img src="../cwes.png" alt="cwes">
+        <p>Pod koniec wakacji postanowiłem przystąpić do egzaminu na certyfikat <strong>CWES (Certified Web Exploitation Specialist)</strong> od Hack The Box. Był to przełomowy krok w mojej dotychczasowej nauce, ponieważ to mój pierwszy certyfikat bezpośrednio z platformy HTB oraz pierwszy "poważniejszy" jaki robiłem który wymagał raportu.</p>
+        
+        <p>Z tego miejsca chciałem złożyć ogromne podziękowania w stronę Michała Błaszczaka, szerzej znanego pod pseudonimem <strong>Miblak</strong>. To właśnie dzięki niemu mogłem przystąpić oraz zdać ten certyfikat. Dziękuję mu także za umożliwienie mi korzystania z platformy Hack The Box Enterprise. To właśnie na niej spędziłem praktycznie całe moje wakacje, ponieważ dostęp miałem tam tylko na okres wakacyjny – trzeba było wycisnąć z tego 100%. Jeszcze raz bardzo dziękuję!</p>
+
+        <p>Sam egzamin zdecydowanie nie należał do najprostszych. Zdobycie flag zajęło mi mniej więcej 17 godzin, które rozbiło się na 3 dni. Niejednokrotnie musiałem zatrzymać się i przemyśleć mój kolejny krok, ponieważ natrafiałem na "ścianę", której na pierwszy rzut oka nie mogłem przeskoczyć.</p>
+
+        <h2>Przygotowanie i Środowisko</h2>
+        
+        <p>Do egzaminu podszedłem klasycznie. Korzystałem z wirtualnej maszyny z <code>Kali Linuxem</code> oraz z obszernej bazy notatek, które gromadziłem przez całą moją naukę na ścieżkach Hack The Box. Jeśli chodzi o narzędzia, które najczęściej używałem, to były to przede wszystkim:</p>
+
+        <ul>
+            <li><strong>Burp Suite</strong></li>
+            <li><strong>FFuF</strong></li>
+            <li><strong>Gobuster</strong></li>
+            <li><strong>SQLmap</strong></li>
+            <li><strong>Wappalyzer</strong></li>
+        </ul>
+
+        <blockquote>
+            Enumeracja to 90% sukcesu na tym egzaminie. Jeśli wydaje ci się, że w aplikacji nie ma luki, to znaczy, że po prostu za słabo fuzzałeś albo coś przeoczyłeś w source code. Dodatkowo polecam mądrze używać AI do szybkiego researchu składni payloadów oraz przede wszystkim – korzystać z własnych notatek z modułów HTB.
+        </blockquote>
+
+        <h2>Ogólny opis egzaminu</h2>
+
+        <p>Środowisko egzaminacyjne składało się z 5 niezależnych aplikacji webowych. W każdej z nich scenariusz był podobny: najpierw musieliśmy zdobyć konto uprzywilejowanej osoby (najczęściej Admina), a następnie po zdobyciu dostępu wykorzystać te uprawnienia do wykonania kodu (RCE) i zdobycia flagi prosto z serwera. Łącznie wszystkich flag było 10, a do zdania wymagane było zdobycie minimum 80 punktów oraz dostarczenie profesjonalnie napisanego raportu z przeprowadzonych testów. Mi udało się zebrać 9 na 10 flag, z czego jestem bardzo dumny.</p>
+
+        <p>Nie mogę niestety zdradzić technicznych detali odnośnie samych aplikacji, ale mogę powiedzieć, że niektóre wektory ataku były w gruncie rzeczy "proste", a rozwiązanie przychodziło z czasem. Człowiek po prostu po kilku godzinach uświadamiał sobie, że przekombinował i próbował robić więcej niż wymagali, podczas gdy ścieżka była znacznie łatwiejsza.</p>
+
+        <p>Niejednokrotnie zdarzało mi się odchodzić od kompa, żeby zrobić sobie krótki spacer, pójść po wodę lub po prostu odpocząć. Ciągłe siedzenie przy kompie prawdopodobnie doprowadziłoby mnie do szału i zablokowało logiczne myślenie. Zmiana kontekstu naprawdę działa – często najlepsze pomysły wpadały mi do głowy z dala od klawiatury. Nie forsujcie się, jeśli nie jesteście w stanie znaleźć rozwiązania przez dłuższy czas.</p>
+
+        <h2>Rady od Albercika</h2>
+
+        <p>Oto moje rady, które moim zdaniem mogą wam uratować życie podczas podejścia do tego certyfikatu:</p>
+
+        <ul>
+            <li><strong>Przerób sumiennie materiał:</strong> Ukończ w 100% ścieżkę <i>Web Penetration Tester</i> na HTB i bądź pewny, że ogarniasz wszystkie podatności. Nie idź na skróty.</li>
+            <li><strong>Notuj wszystko:</strong> Rób porządne notatki i zapisuj komendy! To bardzo ważne, ponieważ czasami nawet drobna rzecz, którą uznałeś za nudną i niepotrzebną podczas robienia modułów, nagle staje się jedyną drogą do flagi na egzaminie.</li>
+            <li><strong>Rób screenshoty na bieżąco:</strong> Nie ma nic gorszego niż zdobycie flagi i uświadomienie sobie przy pisaniu raportu, że brakuje ci dowodu kroków. Rób screeny z każdego kroku który będzie musiał być potem opisany w raporcie.</li>
+            <li><strong>Nie przejmuj się czasem:</strong> Upewnij się, że masz wolny tydzień, aby przysiąść do tego porządnie i nie przejmować się godzinami. Masz całe 7 dni na zdobycie flag oraz raport. Osobiście polecam poświęcić 2-3 pierwsze dni na maksa, aby zdobyć wymagane flagi, a następnie na chłodno napisać raport kiedy ci wygodnie.</li>
+            <li><strong>Narzędzia do raportowania:</strong> Zadbaj o dobry oraz spójny raport. Wygląd i profesjonalizm mają znaczenie. Od siebie mocno polecam skorzystać z narzędzia <strong>SysReptor</strong> z wgranym szablonem stworzonym typowo pod CWES. Ułatwia to bardzo robotę</li>
+        </ul>
+
+        <h2>Podsumowanie</h2>
+
+        <p>Egzamin CWES to niesamowite wyzwanie, które bardzo dobrze weryfikuje realne umiejętności ataku na aplikacje webowe. Było to dla mnie super doświadczenie, świetny sprawdzian wiedzy i każdemu, kto celuje w web security, szczerze polecam spróbować swoich sił.</p>
+        
+        <p>Jeśli macie jakieś pytania odnośnie materiałów przygotowawczych, chcecie pogadać o podejściu do nauki albo po prostu pogadać – łapcie mnie na serwerze Discord NTHW!</p>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        <span class="accent">[ albercik ]</span> &nbsp;|&nbsp; &lt;/&gt; with passion for cybersecurity &nbsp;|&nbsp; <span id="year"></span>
+    </div>
+
+</div>
+
+<script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
