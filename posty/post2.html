@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPTS overview by Albercik · Blog</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    <style>
+        /* BAZOWY CSS */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: #0a0a0a;
+            color: #e0e0e0;
+            font-family: 'Chakra Petch', sans-serif;
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background:
+                radial-gradient(ellipse at 20% 40%, rgba(204, 0, 0, 0.06) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 70%, rgba(255, 69, 0, 0.04) 0%, transparent 60%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem 3rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* HEADER */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.8rem 0 1.5rem;
+            border-bottom: 1px solid rgba(204, 0, 0, 0.15);
+            margin-bottom: 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-decoration: none;
+        }
+
+        .logo-bracket { color: #cc0000; }
+        .logo-name { color: #e0e0e0; transition: color 0.2s; }
+        .logo:hover .logo-name { color: #ff4500; }
+
+        .nav {
+            display: flex;
+            gap: 0.4rem;
+        }
+
+        .nav a {
+            color: #888;
+            text-decoration: none;
+            font-size: 0.8rem;
+            padding: 0.3rem 0.6rem;
+            border: 1px solid transparent;
+            transition: all 0.2s;
+            letter-spacing: 0.5px;
+        }
+
+        .nav a:hover, .nav a.active {
+            color: #e0e0e0;
+            border-color: #cc0000;
+            background: rgba(204, 0, 0, 0.06);
+        }
+
+        /* BACK BUTTON */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #888;
+            text-decoration: none;
+            font-size: 0.85rem;
+            margin-bottom: 2rem;
+            transition: color 0.2s;
+        }
+        
+        .back-link:hover { color: #ff4500; }
+
+        /* POST HEADER */
+        .post-header {
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(204, 0, 0, 0.1);
+        }
+
+        .post-meta {
+            font-size: 0.8rem;
+            color: #666;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .post-meta .author { color: #ff4500; font-weight: 500; }
+        .post-meta .date { color: #999; }
+        
+        .meta-tags {
+            display: flex;
+            gap: 0.4rem;
+        }
+
+        .meta-tag {
+            font-size: 0.65rem;
+            color: #888;
+            border: 1px solid rgba(204, 0, 0, 0.15);
+            padding: 0.2rem 0.6rem;
+            background: rgba(204, 0, 0, 0.03);
+            text-transform: uppercase;
+        }
+
+        .post-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #e0e0e0;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        /* POST CONTENT */
+        .post-content {
+            font-size: 0.95rem;
+            color: #bbb;
+            line-height: 1.8;
+        }
+
+        .post-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .post-content h2 {
+            font-size: 1.4rem;
+            color: #e0e0e0;
+            margin: 2.5rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(204, 0, 0, 0.2);
+            font-weight: 600;
+        }
+
+        .post-content h3 {
+            font-size: 1.1rem;
+            color: #ff4500;
+            margin: 2rem 0 0.8rem;
+            font-weight: 500;
+        }
+
+        .post-content strong {
+            color: #e0e0e0;
+        }
+
+        .post-content a {
+            color: #ff4500;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(204, 0, 0, 0.3);
+            transition: all 0.2s;
+        }
+
+        .post-content a:hover {
+            border-bottom-color: #cc0000;
+            color: #cc0000;
+        }
+
+        .post-content ul, .post-content ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+            color: #bbb;
+        }
+
+        .post-content li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .post-content ul li::marker {
+            color: #cc0000;
+        }
+
+        .post-content blockquote {
+            border-left: 3px solid #cc0000;
+            background: rgba(204, 0, 0, 0.05);
+            padding: 1rem 1.5rem;
+            margin: 2rem 0;
+            color: #999;
+            font-style: italic;
+        }
+
+        .post-content pre {
+            background: #0d0d0d;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-left: 3px solid #ff4500;
+            padding: 1rem 1.2rem;
+            margin-bottom: 1.5rem;
+            overflow-x: auto;
+            border-radius: 2px;
+        }
+
+        .post-content code {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.85rem;
+            color: #a8ff60;
+        }
+
+        .post-content p code, .post-content li code {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.1rem 0.4rem;
+            border-radius: 3px;
+            color: #ff4500;
+            font-size: 0.85rem;
+            border: 1px solid rgba(204, 0, 0, 0.1);
+        }
+
+        .post-content img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid rgba(204, 0, 0, 0.2);
+            margin: 1.5rem 0;
+            display: block;
+        }
+
+        /* FOOTER */
+        .footer {
+            text-align: center;
+            padding: 1.5rem 0 0.5rem;
+            margin-top: 3.5rem;
+            border-top: 1px solid rgba(204, 0, 0, 0.06);
+            font-size: 0.7rem;
+            color: #555;
+            letter-spacing: 0.5px;
+        }
+
+        .footer .accent { color: #cc0000; }
+
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: #555; }
+        ::-webkit-scrollbar-thumb:hover { background: #777; }
+
+        @media (max-width: 640px) {
+            .container { padding: 1rem; }
+            .header { flex-direction: column; align-items: flex-start; gap: 0.8rem; }
+            .post-title { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- HEADER -->
+    <div class="header">
+        <a href="index.html" class="logo">
+            <span class="logo-bracket">[</span>
+            <span class="logo-name">albercik</span>
+            <span class="logo-bracket">]</span>
+        </a>
+        <div class="nav">
+            <a href="../index.html">_portfolio</a>
+            <a href="../blog.html" class="active">_blog</a>
+            <a href="../index.html#contact">_kontakt</a>
+        </div>
+    </div>
+
+    <!-- POWRÓT -->
+    <a href="blog.html" class="back-link">&lsaquo; Wróć do zapisków</a>
+
+    <!-- POST HEADER -->
+    <div class="post-header">
+        <div class="post-meta">
+            <span class="author">@albercik</span>
+            <span class="date">30 Sierpnia 2026</span>
+            <div class="meta-tags">
+                <span class="meta-tag">#cpts</span>
+                <span class="meta-tag">#htb</span>
+                <span class="meta-tag">#pentest</span>
+            </div>
+        </div>
+        <h1 class="post-title">CPTS overview by Albercik</h1>
+    </div>
+
+    <!-- POST CONTENT -->
+    <div class="post-content">
+        <img src="../CPTS.png" alt="cpts">
+        <p>Po ostatnim zdaniu egzaminu <strong>CWES</strong> postanowiłem iść za ciosem i spróbować zdać egzamin <strong>CPTS (Certified Penetration Testing Specialist)</strong> od Hack The Box. I jak widać... udało się...</p>
+
+        <p>Planowany termin zdawania i podejścia do tego certyfikatu miałem zaplanowany na ferie zimowe, ponieważ niedługo zaczynam 4 klasę technikum i nie czułem się zbytnio przygotowany. Lecz z pomocą przyszedł już dobrze znany <strong>Michał "Miblak" Błaszczak</strong>, który jak wiecie z poprzedniego posta dał mi możliwość nauki na Hack The Box Enterprise. Dogadałem się z nim na egzamin CPTS, ponieważ mógł on przypisać mi voucher i twierdził, że dogada z Hack The Box, że voucher będzie dostępny po wygaśnięciu Hack The Box Enterprise. Niestety pewnego dnia powiedział mi, że prawdopodobnie się to nie uda i muszę zdawać coś teraz. Nie powiem, trochę się zestresowałem i trochę nie byłem pewny czy podchodzić do egzaminu, ale w końcu się przełamałem. Także około godziny 16 w niedzielę zacząłem przygodę z CPTS!</p>
+
+        <h2>Przebieg egzaminu — dzień po dniu</h2>
+
+        <h3>Niedziela</h3>
+        <p>Pierwszego dnia od 16 do 23 hakowałem nieprzerwanie i udało mi się zdobyć <strong>4 flagi</strong>, z czego byłem zadowolony i co zmotywowało mnie, żeby hakować dalej.</p>
+
+        <h3>Poniedziałek</h3>
+        <p>Drugiego dnia, wstawszy rano od 10 do 16, udało mi się zdobyć kolejne <strong>4 flagi</strong>! A potem, po przerwie, udało mi się zdobyć jeszcze jedną gdzieś koło 22. Łącznie tego dnia zebrałem <strong>5 flag</strong>.</p>
+
+        <h3>Wtorek</h3>
+        <p>Następnego dnia, czyli we wtorek, udało mi się zebrac <strong>3 flagi</strong>. Spędziłem nad nimi dużo czasu, ale byłem z siebie bardzo dumny. Tego właśnie dnia stwierdziłem, że mając 11 flag zacznę już powoli pisać raport, ponieważ głowa nie pozwalała mi już na dalsze myślenie xD</p>
+
+        <p>Napisałem sporą część raportu, ponieważ przez cały proces gromadziłem solidne notatki i po prostu je przeklejałem, aby pasowały do formatu danego z góry przez Hack The Box.</p>
+
+        <h3>Środa</h3>
+        <p>W środę rano udało mi się zdobyć <strong>12 flagę</strong> i mogłem w 100 procentach skupić się na raporcie. Przygrindowałem i o godzinie <strong>18:21</strong> udało mi się go skończyć po około 5 godzinach sprawdzania i pisania.</p>
+
+        <h2>Narzędzia</h2>
+        
+        <p>Do egzaminu podszedłem na <code>Kali Linux</code>. Narzędzia były zdecydowanie bardziej zorientowane na infrastrukturę i sieci niż podczas CWES. Moje główne narzędzia to:</p>
+
+        <ul>
+            <li><strong>Nmap</strong></li>
+            <li><strong>Ligolo-ng</strong></li>
+            <li><strong>Bloodhound / Bloodhound-python</strong></li>
+            <li><strong>BloodyAD</strong></li>
+            <li><strong>CrackMapExec</strong></li>
+            <li><strong>LDAPsearch</strong></li>
+            <li><strong>Impacket tools</strong></li>
+            <li><strong>Evil-WinRM</strong></li>
+            <li><strong>Remmina</strong></li>
+        </ul>
+
+        <blockquote>
+            Egzamin to nie tylko exploitowanie — to przede wszystkim zrozumienie sieci. Jeśli nie potrafisz poruszać się po infrastrukturze, nie zdasz. Nauka pivotowania, tunnelingu i zrozumienie relacji w Active Directory to absolutna podstawa.
+        </blockquote>
+
+        <h2>Wrażenia z egzaminu</h2>
+
+        <p>Podczas egzaminu musiałem z siebie dawać naprawdę czasami 120 procent. Mimo że przerobiłem w przeszłości dużo materiałów, które by mnie do niego przygotowały, i tak były miejsca, w których musiałem się zatrzymać. Był to na pewno trudniejszy egzamin od poprzedniego CWES, ale uważam, że flagi 1-8 były dosyć prostoliniowe, dopiero dalej było trochę trudniej, ale też głównie kwestia enumeracji i cierpliwości.</p>
+
+        <p>W przeciwieństwie do CWES nie odchodziłem często od komputera. Byłem w niego długo wpatrzony i starałem sie cały czas zachować focus siedząc po 6h+ dziennie, przez co po 2 dni zaczęły boleć mnie oczy... ale to mniejsza...</p>
+
+        <h2>Rady od Albercika</h2>
+
+        <p>Oto moje rady, które moim zdaniem mogą wam ułatwić podejście do CPTS:</p>
+
+        <ul>
+            <li><strong>Zrozum Active Directory:</strong> To absolutna podstawa tego egzaminu. Musisz wiedzieć jak działa Kerberos, LDAP, GPO, ACL — i jak to wszystko wykorzystać. Jeśli AD jest dla ciebie trudne, wróć do materiałów.</li>
+            <li><strong>Naucz się pivotować:</strong> Ligolo-ng lub inny tunneling tool to must-have. Infrastruktura CPTS jest segmented i bez tunnelingu nie dotrzesz do wielu hostów.</li>
+            <li><strong>Notuj wszystko:</strong> Podczas pisania raportu twoje notatki to złoto. Bez nich będziesz pisać raport z pamięci, a to droga do błędów.</li>
+            <li><strong>Rób screenshoty:</strong> Dowody fotograficzne twoich kroków to obowiązkowa część raportu. Nie ma nic gorszego niż zdobycie flagi i brak screena potwierdzającego metodę.</li>
+            <li><strong>Daj sobie czas:</strong> 10 dni to rozsądny timeframe na zdobycie wymaganych flag. Nie spiesz się — lepiej zrobić to porządnie niż pisać raport w pośpiechu.</li>
+            <li><strong>Raportowanie:</strong> Profesjonalny raport to połowa sukcesu. Skorzystaj z <strong>SysReptor</strong> z szablonem CPTS. Struktura, spójność i czytelność mają ogromne znaczenie.</li>
+        </ul>
+
+        <h2>Podsumowanie</h2>
+
+        <p>Jestem naprawdę dumny z siebie, że zaszedłem tak daleko. Wszystkie te dni spędzone nad komputerem i cały ten czas naprawdę się opłaciły.</p>
+
+        <p>CPTS to egzamin, który naprawdę weryfikuje umiejętności. To nie tylko zdobywanie flag — to full scope ataku od rekonesansu do przejęcia całej domeny. Był to dla mnie niesamowity sprawdzian i fantastyczna okazja do nauki.</p>
+
+        <p>Nie wiem co dalej... może <strong>OSCP</strong>...? Haha... jeśli uda mi się go zdobyć w wieku 17 lat, jestem prawie pewien, że będę jednym z najmłodszych, którzy go posiadają, a także jednym z nielicznych, którzy będą mogli się pochwalić taką kolekcją certyfikatów w takim wieku.</p>
+        
+        <p>Jeśli macie jakieś pytania, chcecie pogadać o podejściu do egzaminu albo po prostu wymienić się doświadczeniami — piszcie na Discord NTHW!</p>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        <span class="accent">[ albercik ]</span> &nbsp;|&nbsp; &lt;/&gt; with passion for cybersecurity &nbsp;|&nbsp; <span id="year"></span>
+    </div>
+
+</div>
+
+<script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
